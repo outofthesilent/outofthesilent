@@ -3,15 +3,31 @@
 I build the operational layer underneath businesses — the scheduling, billing,
 communications and reporting that a company's tools don't do for each other.
 
-I spent 25 years in education before this: classroom teaching, then curriculum
-design, then district-level instructional technology for a district of 3,000+
-employees. I came into software sideways, by running sales and CRM on software
-I came to understand the limits of, and then building its replacement.
+I start from what has to be true at the end. Name the outcome, decide what
+would count as evidence that you got it, and only then decide what to build.
+The usual order is to build the thing and then work out how to tell whether
+it's right — which is why systems pass their tests and still fail in
+production. The tests were written to fit what got built, so they can only
+confirm it.
 
-I'm now the sole engineer on a multi-tenant platform that four independent
+In practice that means the hard part of a system is a sentence, written before
+any code:
+
+- *A family must never be charged twice.* → idempotency keys on every charge
+  path, and reconciliation against the processor rather than against my own
+  records.
+- *A spend limit must not be able to fail open.* → four invariants, written as
+  tests instead of intentions. That's `llm-breaker`, below.
+- *Nobody loses a lesson during the cutover.* → a synthetic twin of the live
+  data, so the migration was the last step rather than the test.
+- *Any lane of work can be picked up cold.* → 94 protocol documents, because
+  "what good output looks like" has to be written down before the work starts,
+  not after.
+
+I'm the sole engineer on a multi-tenant platform that four independent
 organisations run their day-to-day operations on, across three separately
-branded domains — 793 tables, 740 row-level security policies, 187 edge
-functions, and 8,204 commits in eleven months.
+branded domains — 794 tables, 740 row-level security policies, 187 edge
+functions, and 8,468 commits in eleven months.
 
 ### Public code
 
@@ -37,12 +53,13 @@ runtime.
 
 ### What isn't public
 
-Most of what I've built runs a live business, so the code stays closed. The write-ups are not: the architecture, the trade-offs and the
-production incidents are at
+Most of what I've built runs a live business, so the code stays closed. The
+write-ups are not: the architecture, the trade-offs and the production
+incidents are at
 **[thefulllifemedia.com/work](https://thefulllifemedia.com/work)** — including
 what it took to retrofit multi-tenancy into a live single-tenant system with no
-downtime, and a payment engine that has moved $817K across 5,019
-transactions, built so that a retry cannot take the money twice.
+downtime, and a payment engine that has moved $817K across 5,019 transactions,
+built so that a retry cannot take the money twice.
 
 ### Contact
 
