@@ -24,10 +24,12 @@ any code:
   "what good output looks like" has to be written down before the work starts,
   not after.
 
-I'm the sole engineer on a multi-tenant platform that four independent
-organisations run their day-to-day operations on, across three separately
-branded domains — 794 tables, 740 row-level security policies, 187 edge
-functions, and 8,468 commits in eleven months.
+I'm the sole engineer on the platform three brands run their day-to-day
+operations on — six locations, four states, a metro that straddles a state
+line, and two delivery modes with no address at all. One codebase, no
+per-brand forks: every feature ships once and has to be right in every
+combination. That is what 794 tables, 740 row-level security policies and
+187 edge functions actually are — not effort, but what the matrix costs.
 
 ### Public code
 
